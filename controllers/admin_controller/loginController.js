@@ -28,8 +28,8 @@ const login = async (req,res) =>{
         const userInfo = await queryAsync(q,email);
         if(userInfo){
           if(password == userInfo[0].password){ 
-            res.cookie('adminToken',result);
-            res.render('pages/index',{adminType:result});
+            res.cookie('adminToken',userInfo);
+            res.render('admin/index',{adminType:userInfo});
             //res.redirect('/index');
         }else{
             return res.status(422).json({
@@ -49,5 +49,17 @@ const login = async (req,res) =>{
   }
 }
 
+ const dashboard = async(req,res) =>{
+  try{
+    return res.render("admin/index")
+  }catch(error){
+    console.log(error);
+    return res.status(500).json({message:"Internal Server Error"});
+  }
+}
 
-module.exports = login
+
+module.exports = {
+  login,
+  dashboard
+}

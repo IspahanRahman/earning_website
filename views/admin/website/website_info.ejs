@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+    <title>Ng Task Admin</title>
+</head>
+<body>
+
+    <%- include('../partials/side_navbar'); %>
+
+
+    <!--Container Main start-->
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <h3>Website Information</h3>
+            
+            <form action="/admin/website_info_update" method="post">
+                <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">About Information</label>
+                    <div class="col-sm-10">
+                        <textarea name="about" id="" cols="100" rows="10"><%=website_info[0].about_info %></textarea>
+                    </div>
+                </div>
+                
+
+                <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Contact Information</label>
+                    <div class="col-sm-10">
+                        <textarea name="contact_info" id="" cols="100" rows="10"><%= website_info[0].contact_info %></textarea>
+
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Home Image Url</label>
+                    <div class="col-sm-10">
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="home_image_url" 
+                            name="home_image_url"
+                            value="<%=website_info[0].home_image_url%>"
+                        >
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label  class="col-sm-2 col-form-label">Support Info</label>
+                    <div class="col-sm-10">
+                        <textarea name="support_info" id="" cols="100" rows="10"><%= website_info[0].support_info %></textarea>
+
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="margin-left:auto;margin-right:auto;display:block;margin-top:2%;margin-bottom:5%">Submit</button>
+            </form>
+              
+            
+            
+            
+        </div>
+    </div>
+    <!--Container Main end-->
+
+    <%- include('../partials/footer_link'); %>
+    
+</body>
+</html>
