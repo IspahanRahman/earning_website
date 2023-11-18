@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+    <title>NG Task Admin</title>
+</head>
+<body>
+
+    <%- include('../partials/side_navbar'); %>
+
+    <!--Container Main start-->
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+          <nav class="navbar navbar-expand-sm navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="javascript:void(0)">Notice</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="mynavbar">
+                <ul class="navbar-nav me-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/admin/notice_add">Add Notice</a>
+                  </li>
+                  
+                </ul>
+                
+              </div>
+            </div>
+          </nav>
+        </div>
+    </div>
+    <div class="pagination" style="align-items: center; justify-content: center;">
+      <% if (totalPages > 1) { %>
+          <% for (let i = 1; i <= totalPages; i++) { %>
+            <a class="btn <%= page === i ? 'btn-secondary' : 'btn-outline-primary' %>" style="margin-right: 10px; font-size: larger;" href="?page=<%= i %>"><%= i %></a>
+          <% } %>
+      <% } %>
+  </div>
+    <div class="container-fluid pt-4 px-4">
+      <div class="row ">
+          <div class="">
+            <div class="bg-light rounded h-100 p-4">
+              <table class="table table-hover pt-5">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Notice</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <% var itemsPerPage = 20; var page = parseInt(req.query.page) || 1;var startIndex = (page - 1) * itemsPerPage;
+                  notice.forEach(function(notice,notice_index) { %>
+                    <tr>
+                        <th scope="row"><%= startIndex + notice_index + 1 %></th>
+                        <td><%= notice.notice %></td>
+                        <td>
+                          <div class="btn-group" role="group" >
+                            <a type="button" class="btn btn-outline-primary" href="/admin/notice_update?id=<%= notice.notice_id %>">Update</a>
+                            <a type="button" class="btn btn-outline-danger" href="/admin/notice_delete?id=<%= notice.notice_id %>">Delete</a>
+                          </div>
+                        </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!--Container Main end-->
+
+    <%- include('../partials/footer_link'); %>
+    
+</body>
+</html>

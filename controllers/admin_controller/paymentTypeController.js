@@ -1,5 +1,6 @@
 const conn = require('../../config/database');
 const pagination = require('../../middlewares/pagination');
+
 // Helper function to wrap db.query in a promise
 function queryAsync(query, values) {
   return new Promise((resolve, reject) => {
@@ -20,15 +21,15 @@ function queryAsyncWithoutValue(query) {
   });
 }
 
-const payment_methods = async(req,res) =>{
+const payment_types = async(req,res) =>{
   try{
-    const query = "SELECT *FROM payment_method";
-    const payment_methods = await queryAsyncWithoutValue(query);
+    const query = "SELECT *FROM payment_types";
+    const payment_types = await queryAsyncWithoutValue(query);
     const itemsPerPage = 20;
     const page = parseInt(req.query.page) || 1;
-    const { paginatedData, totalPages } = pagination(payment_methods, page, itemsPerPage);
-    return res.render('admin/payment_method/payment_methods',{
-      payment_methods: paginatedData,
+    const { paginatedData, totalPages } = pagination(payment_types, page, itemsPerPage);
+    return res.render('admin/payment_types/payment_types',{
+      payment_types: paginatedData,
       totalPages: totalPages,
       req:req,
       page:page,
@@ -40,23 +41,22 @@ const payment_methods = async(req,res) =>{
   }
 }
 
-const payment_method_add = async(req,res) => {
+const payment_type_add = async(req,res) => {
   try{
-    return res.render('admin/payment_method/payment_method_add');
+    return res.render('admin/payment_types/payment_type_add');
   }catch(error){
     console.log(error);
     return res.status(500).json({message:"Internal Server Error"});
   }
 }
 
-const payment_method_add_post = async(req,res) => {
+const payment_type_add_post = async(req,res) => {
   try{
-    const {method,number} = req.body;
-    const query = "INSERT INTO payment_method (method,number)VALUES(?,?)";
-    const values = [method,number];
-    const payment_method = await queryAsync(query,values);
-    if(payment_method){
-      return res.redirect("/admin/payment_methods");
+    const {payment_type} = req.body;
+    const query = "INSERT INTO payment_types (payment_type)VALUES(?)";
+    const type = await queryAsync(query,payment_type);
+    if(type){
+      return res.redirect("/admin/payment_types");
     }
     else{
       return res.status(500).json({message:"Something went wrong"});
@@ -67,16 +67,16 @@ const payment_method_add_post = async(req,res) => {
   }
 }
 
-const payment_method_update = async(req,res)=>{
+const payment_type_update = async(req,res)=>{
   try{
     const {id} = req.query;
-    const q = "SELECT *FROM payment_method WHERE id = ?";
-    const paymentMethodInfo = await queryAsync(q,id);
-    if(paymentMethodInfo.length==0){
+    const q = "SELECT *FROM payment_types WHERE id = ?";
+    const paymentTypeInfo = await queryAsync(q,id);
+    if(paymentTypeInfo.length==0){
       return res.status(409).json({message:"Data not found"});
     }else{
-      return res.render('admin/payment_method/payment_method_update',{
-        paymentMethodInfo: paymentMethodInfo,
+      return res.render('admin/payment_types/payment_type_update',{
+        paymentTypeInfo: paymentTypeInfo,
       });
     }
   }catch(error){
@@ -85,14 +85,14 @@ const payment_method_update = async(req,res)=>{
   }
 }
 
-const payment_method_update_post = async(req,res)=>{
+const payment_type_update_post = async(req,res)=>{
   try{
-    const {method,number,id} = req.body;
-    const query = "UPDATE payment_method SET method=? , number= ?  WHERE id=?";
-    const values = [method,number,id];
-    const methodInfo = await queryAsync(query,values);
-    if(methodInfo){
-      return res.redirect("/admin/payment_methods");
+    const {payment_type,id} = req.body;
+    const query = "UPDATE payment_types SET payment_type=? WHERE id=?";
+    const values = [payment_type,id];
+    const typeInfo = await queryAsync(query,values);
+    if(typeInfo){
+      return res.redirect("/admin/payment_types");
     }
     else{
       return res.status(500).json({message:"Something went wrong"});
@@ -103,13 +103,13 @@ const payment_method_update_post = async(req,res)=>{
   }
 }
 
-const payment_method_delete = async(req,res)=>{
+const payment_type_delete = async(req,res)=>{
   try{
     const {id} = req.query;
-    const q = "DELETE FROM payment_method WHERE id=?";
+    const q = "DELETE FROM payment_types WHERE id=?";
     conn.query(q,[id],(err,result) =>{
         if(err) throw err;
-        res.redirect(`/admin/payment_methods`);
+        res.redirect(`/admin/payment_types`);
     })
 
   }catch(error){
@@ -120,10 +120,10 @@ const payment_method_delete = async(req,res)=>{
 
 
 module.exports={
-  payment_methods,
-  payment_method_add,
-  payment_method_add_post,
-  payment_method_update,
-  payment_method_update_post,
-  payment_method_delete
+  payment_types,
+  payment_type_add,
+  payment_type_add_post,
+  payment_type_update,
+  payment_type_update_post,
+  payment_type_delete
 }
