@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+	font-family: 'Kanit', sans-serif;
+}
+
+.marquee-container {
+	@apply overflow-x-hidden;
+	& > .marquee-text {
+		/* transform: translateX(-100%); */
+		/* animation: scroll 15s linear;
+		animation-iteration-count: infinite; */
+		@apply animate-[scrollSM_40s_linear_infinite] xl:animate-[scrollXL_40s_linear_infinite];
+	}
+}
+
+@keyframes scrollXL {
+	0% {
+		transform: translateX(200%);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+@keyframes scrollSM {
+	0% {
+		transform: translateX(50%);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+.btn {
+	@apply p-3 font-medium uppercase border rounded-xl active:scale-[0.9] duration-150;
+}
+
+.btn-primary {
+	@apply text-white duration-150 bg-primary hover:shadow-md border-primary;
+}
+
+.btn-primary-outline {
+	@apply duration-150 border-primary text-primary hover:bg-primary hover:text-white;
+}
+
+.input-container {
+	@apply relative flex flex-col pt-5 text-lg;
+
+	& > label {
+		@apply absolute bottom-[5%] duration-150 text-primary select-none;
+	}
+
+	& > input {
+		@apply py-1 bg-transparent border-b border-primary focus:outline-none;
+	}
+}
+
+.label-hide {
+	@apply text-sm translate-y-[-180%];
+}

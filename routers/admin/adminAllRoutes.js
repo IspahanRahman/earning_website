@@ -8,6 +8,7 @@ const taskRoute = require('./taskRoute');
 const paymentMethodRoute = require('./paymentMethodRoute');
 const paymentTypeRoute = require('./paymentTypeRoute');
 const noticeRoute = require('./noticeRoute');
+const referSettingsRoute = require('./referSettingsRoute');
 
 
 const admin = require('../../middlewares/admin');
@@ -20,5 +21,6 @@ adminRoute.use(taskRoute);
 adminRoute.use(paymentMethodRoute);
 adminRoute.use(paymentTypeRoute);
 adminRoute.use(noticeRoute);
+adminRoute.use(referSettingsRoute);
 
 module.exports = adminRoute;

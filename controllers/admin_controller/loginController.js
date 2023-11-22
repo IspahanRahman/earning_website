@@ -51,7 +51,7 @@ const login = async (req,res) =>{
 
  const dashboard = async(req,res) =>{
   try{
-    return res.render("admin/index")
+    return res.render("admin/index");
   }catch(error){
     console.log(error);
     return res.status(500).json({message:"Internal Server Error"});

@@ -1,0 +1,77 @@
+<%- include('../partial/header'); -%>
+		<div
+			class="lg:w-[60%] w-full px-5 lg:px-0 py-5 flex flex-col items-center mx-auto"
+		>
+			<img src="/img/logo.jpg" alt="" class="w-36" />
+
+
+
+			<form class="flex flex-col lg:w-[40%] w-full mt-16 gap-y-6" action="/api/addUser" method="POST">
+				<% if(regMessage){ %>
+					<p class="massage p-2 bg-primary text-center">
+						<%= regMessage %>
+					</p>
+					<% } %>
+				<!-- <div > -->
+					<div class="input-container">
+						<label for="mobile">Full Name</label>
+						<input type="text" name="name" id="name"/>
+					</div>
+	
+					<div class="input-container">
+						<label for="mobile">Mobile Number</label>
+						<input type="tel" name="mobile" id="mobile"/>
+					</div>
+	
+					<div class="input-container">
+						<label for="mobile">Password</label>
+						<input type="password" name="password" id="password" />
+					</div>
+	
+					<div class="input-container">
+						<label for="mobile">Confirm Password</label>
+						<input type="password" name="confirm_pass" id="confirm_pass"/>
+					</div>
+	
+					<div class="input-container">
+						<label for="mobile">Refer Code (1234)</label>
+						<input type="text" name="referer_code" id="referer_code"/>
+					</div>
+	
+					<button 
+						type="submit"
+						class="p-2 mt-5 uppercase duration-150 border border-gray-300 rounded-full hover:text-white hover:bg-primary hover:border-primary"
+					>
+						Register
+					</button>
+				<!-- </div> -->
+			</form>
+
+			<p class="mt-10 text-sm">Have an account?</p>
+			<a href="/api/loginPage" class="text-primary">Login Now</a>
+		</div>
+	</body>
+	<script>
+		'use strict';
+		const inputLabels = document.querySelectorAll('.input-container label');
+		const inputFields = document.querySelectorAll('.input-container  input');
+
+		inputFields.forEach((f, i) => {
+			f.addEventListener('focus', (e) => {
+				f.parentElement.children[0].classList.add('label-hide');
+			});
+			f.addEventListener('blur', (e) => {
+				// console.log(f.value);
+				if (f.value === '') {
+					f.parentElement.children[0].classList.remove('label-hide');
+				}
+			});
+		});
+
+		inputLabels.forEach((l) => {
+			l.addEventListener('click', (e) => {
+				l.parentElement.children[1].focus();
+			});
+		});
+	</script>
+</html>

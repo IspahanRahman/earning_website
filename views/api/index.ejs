@@ -1,0 +1,155 @@
+<%- include('../partial/header'); -%>
+	<body class="min-h-screen bg-base-200">
+       <!-- header -->
+		<div
+        class="relative flex flex-col items-center py-3 gap-y-5"
+        style="
+            background: url('img/homebg.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        "
+    >
+        <div class="bg-base-100 rounded-3xl">
+            <img src="/img/logo.webp" class="w-24 h-fit" />
+        </div>
+        <div
+            class="flex items-center p-1 rounded-full cursor-pointer select-none gap-x-2 bg-base-100 balance-container"
+        >
+            <p class="px-1 rounded-full text-base-100 bg-primary">&#2547;</p>
+            <p class="balance-statement">Tap for Balance</p>
+        </div>
+
+        <div class="absolute p-2 rounded-full right-[2%] bg-base-100">
+            <i class="text-2xl bi bi-box-arrow-right"></i>
+        </div>
+    </div>
+
+    <!-- marquee sections -->
+    <div class="flex w-full border-t border-b border-primary">
+        <p class="p-2 text-white bg-primary">Notice:</p>
+        <div
+            class="flex items-center flex-grow marquee-container bg-primary-subtle"
+        >
+            <p class="marquee-text whitespace-nowrap">
+                If you deposit 2000 BDT, You will get 500 BDT Extra bonus. You will
+                get 2500 BDT in your balance with bonus. NG Task is a trusted
+                platform.
+            </p>
+        </div>
+    </div>
+
+    <!-- hero image section -->
+    <div class="">
+        <img src="/img/fotor-1697828073315.webp" class="w-full" alt="" />
+    </div>
+
+    <!-- all services section -->
+    <div class="flex flex-col px-5 my-10 gap-y-5">
+        <p class="text-xl font-semibold text-primary">All Services</p>
+        <div class="grid grid-cols-4">
+            <a href="./task.html">
+                <div class="flex flex-col cursor-pointer gap-y-2">
+                    <div
+                        class="self-center p-3 text-white rounded-2xl bg-primary w-fit"
+                    >
+                        <i class="text-4xl bi bi-briefcase-fill"></i>
+                    </div>
+                    <p class="self-center">My Task</p>
+                </div>
+            </a>
+
+            <a href="./profile.html">
+                <div class="flex flex-col cursor-pointer gap-y-2">
+                    <div
+                        class="self-center p-3 text-white rounded-2xl bg-primary w-fit"
+                    >
+                        <i class="text-4xl bi bi-person-circle"></i>
+                    </div>
+                    <p class="self-center">Profile</p>
+                </div>
+            </a>
+
+            <a href="./refer.html">
+                <div class="flex flex-col cursor-pointer gap-y-2">
+                    <div
+                        class="self-center p-3 text-white rounded-2xl bg-primary w-fit"
+                    >
+                        <i class="text-4xl bi bi-people-fill"></i>
+                    </div>
+                    <p class="self-center">Refer</p>
+                </div>
+            </a>
+
+            <a href="./about.html">
+                <div class="flex flex-col cursor-pointer gap-y-2">
+                    <div
+                        class="self-center p-3 text-white rounded-2xl bg-primary w-fit"
+                    >
+                        <i class="text-4xl bi bi-person-fill"></i>
+                    </div>
+                    <p class="self-center">About</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- payment section -->
+    <div class="flex flex-col px-5 my-10 gap-y-5">
+        <p class="text-xl font-semibold text-primary">Payment</p>
+        <div class="grid grid-cols-4">
+            <a href="./investment.html">
+                <div class="flex flex-col cursor-pointer gap-y-2">
+                    <div
+                        class="self-center p-3 text-white rounded-2xl bg-primary w-fit"
+                    >
+                        <i class="text-4xl bi bi-cash"></i>
+                        <!-- <p>&#2547</p> -->
+                    </div>
+                    <p class="self-center">Investment</p>
+                </div>
+            </a>
+
+            <div class="flex flex-col cursor-pointer gap-y-2">
+                <div class="self-center p-3 text-white rounded-2xl bg-primary w-fit">
+                    <i class="text-4xl bi bi-cash-stack"></i>
+                </div>
+                <p class="self-center">Withdraw</p>
+            </div>
+
+            <div class="flex flex-col cursor-pointer gap-y-2">
+                <div class="self-center p-3 text-white rounded-2xl bg-primary w-fit">
+                    <i class="text-4xl bi bi-list-ul"></i>
+                </div>
+                <p class="self-center">Transaction</p>
+            </div>
+
+            <a href="./packages.html">
+                <div class="flex flex-col cursor-pointer gap-y-2">
+                    <div
+                        class="self-center p-3 text-white rounded-2xl bg-primary w-fit"
+                    >
+                        <i class="text-4xl bi bi-credit-card"></i>
+                    </div>
+                    <p class="self-center">Plan</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+<script>
+    'use strict';
+    const balanceContainer = document.querySelector('.balance-container');
+    const balanceStatement = document.querySelector('.balance-statement');
+
+    balanceContainer.addEventListener('click', (e) => {
+        if (!balanceStatement.classList.contains('balance-show')) {
+            balanceStatement.classList.add('balance-show');
+            balanceStatement.innerHTML = '500 BDT';
+            setTimeout(() => {
+                balanceStatement.classList.remove('balance-show');
+                balanceStatement.innerHTML = 'Tap for Balance';
+            }, 1500);
+        }
+    });
+</script>
+</html>
