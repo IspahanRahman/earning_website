@@ -58,7 +58,7 @@
 		@apply absolute bottom-[5%] duration-150 text-primary select-none;
 	}
 
-	& > input {
+	& > .input {
 		@apply py-1 bg-transparent border-b border-primary focus:outline-none;
 	}
 }

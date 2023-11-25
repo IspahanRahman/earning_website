@@ -1,0 +1,73 @@
+<%- include('../partial/header'); -%>
+		<div
+			class="flex items-center w-full px-5 py-3 text-xl font-semibold text-white border-t border-b gap-x-4 bg-primary border-primary"
+		>
+			<a href="./index.html">
+				<i class="text-2xl bi bi-chevron-left"></i>
+			</a>
+			<p>Withdraw</p>
+		</div>
+		<div class="flex flex-col p-5 gap-y-5">
+			<div class="p-5 font-medium bg-base-100 rounded-xl">
+				Minimum withdraw is 500BDT. Withdrawal will be successful in auto
+				system.
+			</div>
+
+			<div class="flex flex-col p-5 gap-x-2 bg-base-100 rounded-xl">
+				<p>Enter your payment information carefully</p>
+				<div class="flex flex-col my-5 gap-y-5">
+					<div class="input-container">
+						<label for="mobile">Number</label>
+						<input type="tel" class="input" />
+					</div>
+					<div class="input-container">
+						<label for="mobile">Amount</label>
+						<input type="number" class="input" />
+					</div>
+
+					<div class="input-container">
+						<label for="mobile">Method</label>
+						<select class="input">
+							<option value="bkash"></option>
+							<option value="bkash">bkash</option>
+							<option value="nagad">nagad</option>
+							<option value="rocket">rocket</option>
+						</select>
+					</div>
+				</div>
+
+				<button
+					class="p-2 mt-5 uppercase duration-150 border border-gray-300 rounded-full hover:text-white hover:bg-primary hover:border-primary"
+				>
+					Withdraw
+				</button>
+				<a href="./index.html" class="mt-5 text-center text-blue-500"
+					>Back to Home</a
+				>
+			</div>
+		</div>
+	</body>
+	<script>
+		'use strict';
+		const inputLabels = document.querySelectorAll('.input-container label');
+		const inputFields = document.querySelectorAll('.input-container  .input');
+
+		inputFields.forEach((f, i) => {
+			f.addEventListener('focus', (e) => {
+				f.parentElement.children[0].classList.add('label-hide');
+			});
+			f.addEventListener('blur', (e) => {
+				// console.log(f.value);
+				if (f.value === '') {
+					f.parentElement.children[0].classList.remove('label-hide');
+				}
+			});
+		});
+
+		inputLabels.forEach((l) => {
+			l.addEventListener('click', (e) => {
+				l.parentElement.children[1].focus();
+			});
+		});
+	</script>
+</html>

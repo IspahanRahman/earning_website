@@ -60,16 +60,19 @@ const login = async (req, res) => {
       loginMessage = "Wrong mobile or password";
       return res.redirect("/api/loginPage");
     } else {
-      bcrypt.compare(password, userInfo[0].password).then((isValidPassword) => {
+      bcrypt.compare(password, userInfo[0].password).then(async (isValidPassword) => {
         if (isValidPassword) {
-          let userId = userInfo[0].id;
-          res.cookie("userId", userId);
+          res.cookie("userId", userInfo);
           login_status = true;
+          const query = "SELECT * FROM notice";
+          const notices = await queryAsyncWithoutValue(query);
           return res.render(
             "api/index",
             {
               login_status: req.login_status,
               loginMessage: loginMessage,
+              userInfo:userInfo,
+              notices:notices
             },
             (loginMessage = null)
           );
@@ -157,9 +160,68 @@ const addUser = async (req, res) => {
   }
 };
 
+const logOut = (req, res) => {
+  try{
+    res.clearCookie("userId");
+    req.login_status = false;
+    res.redirect("/api/loginPage");
+  }catch(error){
+    console.log(error);
+    return res.status(500).json({message:"Internal Server Error"});
+  }
+};
+
+const profile = async(req,res) =>{
+  try{
+    const {id} = req.query;
+    const q = "SELECT * FROM users WHERE user_id=?";
+    const profile = await queryAsync(q,id);
+    if(profile.length!=0){
+      return res.render('api/profile',{
+        login_status: req.login_status,
+        profile:profile
+      })
+    }
+    else{
+      return res.redirect('/api/homePage');
+    }
+
+  }catch(error){
+    console.log(error);
+    return res.status(500).json({message:"Internal Server Error"});
+  }
+}
+
+const homePage = async(req,res)=>{
+  try{
+    const user = req.userId;
+    const user_id =user[0].user_id;
+    const query = "SELECT * FROM users WHERE user_id=?";
+    const userInfo = await queryAsync(query,user_id);
+    if(userInfo.length!=0){
+      const query1 = "SELECT * FROM notice";
+      const notices = await queryAsyncWithoutValue(query1);
+      return res.render('api/index',{
+        login_status: req.login_status,
+        loginMessage: loginMessage,
+        userInfo:userInfo,
+        notices:notices
+      },
+      (loginMessage = null)
+      )
+    }
+  }catch(error){
+    console.log(error);
+    return res.status(500).json({message:"Internal Server Error"});
+  }
+}
+
 module.exports = {
   registerPage,
   addUser,
   loginPage,
   login,
+  logOut,
+  profile,
+  homePage
 };

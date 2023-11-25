@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="css/output.css" />
-		<title>NGTask</title>
-	</head>
-	<body class="min-h-screen bg-base-200">
+<%- include('../partial/header'); -%>
 		<div
 			class="flex items-center w-full px-5 py-3 text-xl font-semibold text-white border-t border-b gap-x-4 bg-primary border-primary"
 		>
-			<a href="./index.html">
+			<a href="/api/homePage">
 				<i class="text-2xl bi bi-chevron-left"></i>
 			</a>
 			<p>Profile</p>
@@ -27,21 +19,21 @@
 						<i class="bi bi-person-circle"></i>
 					</div>
 					<p class="mr-1">Name:</p>
-					<p>Chaion Saha</p>
+					<p><%= profile[0].name %></p>
 				</div>
 				<div class="flex items-center p-5 border-b border-gray-100">
 					<div class="p-1 px-2 mr-3 text-white rounded-full bg-primary">
 						<i class="bi bi-telephone-fill"></i>
 					</div>
 					<p class="mr-1">Mobile Number:</p>
-					<p>0123456789</p>
+					<p><%= profile[0].mobile %></p>
 				</div>
 				<div class="flex items-center p-5 border-b border-gray-100">
 					<div class="p-1 px-2 mr-3 text-white rounded-full bg-primary">
 						<i class="bi bi-cash"></i>
 					</div>
 					<p class="mr-1">Balance:</p>
-					<p>0 BDT</p>
+					<p><%= profile[0].balance %> BDT</p>
 				</div>
 				<div class="flex items-center p-5 border-b border-gray-100">
 					<div class="p-1 px-2 mr-3 text-white rounded-full bg-primary">

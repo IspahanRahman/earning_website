@@ -2,7 +2,7 @@
 		<div
 			class="flex items-center w-full px-5 py-3 text-xl font-semibold text-white border-t border-b gap-x-4 bg-primary border-primary"
 		>
-			<a href="./index.html">
+			<a href="/api/homePage">
 				<i class="text-2xl bi bi-chevron-left"></i>
 			</a>
 			<p>About NGTask</p>
@@ -12,13 +12,11 @@
 				class="flex flex-col items-center p-5 text-center gap-y-5 bg-base-100 rounded-xl"
 			>
 				<p class="p-1 py-3 border-2 rounded-full">
-					<img src="./img/logo.jpg" class="w-32" alt="" />
+					<img src="/img/logo.jpg" class="w-32" alt="" />
 				</p>
 				<p class="text-2xl font-semibold">NGTask</p>
 				<p class="text-left xl:text-center">
-					NG Task is a trusted company site which fetches ads from other places
-					and gives you views and gives you some profit from it. You can earn
-					lifetime income from it. Join Telegram now to get all updates .
+					<%= website_info[0].about_info %>
 				</p>
 			</div>
 		</div>
@@ -28,8 +26,7 @@
 			>
 				<p class="text-2xl font-semibold">Help Line</p>
 				<p>
-					Contact 24/7 helpline for any need. We are at your service 24 hours a
-					day.
+					<%= website_info[0].contact_info %>
 				</p>
 				<div class="flex items-center gap-x-5">
 					<button class="btn btn-primary">whatsapp</button>
